@@ -1,2 +1,3 @@
-# dotrc
-my config files
+# file
+
+- [bashrc](#file-bashrc)
