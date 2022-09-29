@@ -1,6 +1,8 @@
 d=$(shell pwd)
 
 install: 
+	mkdir -p    $(HOME)/.config/ranger
+	ln -sf $d/rc.conf     $(HOME)/.config/ranger/rc.conf
 	ln -sf $d/vimrc     $(HOME)/.vimrc
 	ln -sf $d/nanorc    $(HOME)/.nanorc
 	ln -sf $d/tmux-conf $(HOME)/.tmux-conf
