@@ -1,5 +1,6 @@
 MAKEFLAGS += --silent
 SHELL=/bin/bash
+R=$(shell git rev-parse --show-toplevel)
 
 help:
 	echo ""; echo "make [OPTIONS]"; echo ""; echo "OPTIONS:"
@@ -7,6 +8,14 @@ help:
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}\
 	               {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
+
+other: $R/../luafun $/../readme
+
+$R/../luafun:
+	cd $R/..; git clone https://github.com/timm/luafun
+
+$R/../readme:
+	cd $R/..; git clone https://github.com/timm/readme
 
 install: ## install all the dot files
 	mkdir -p    $(HOME)/.config/ranger
