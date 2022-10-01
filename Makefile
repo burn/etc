@@ -2,35 +2,26 @@ MAKEFLAGS += --silent
 SHELL=/bin/bash
 R=$(shell git rev-parse --show-toplevel)
 
-help:
-	echo ""; echo "make [OPTIONS]"; echo ""; echo "OPTIONS:"
+help: ## show help
+	echo ""; echo "# dotrc"; echo "make [OPTIONS]"; echo ""; echo "OPTIONS:"
 	grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}\
 	               {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
 
-other: $R/../luafun $/../readme
-
-$R/../luafun:
-	cd $R/..; git clone https://github.com/timm/luafun
-
-$R/../readme:
-	cd $R/..; git clone https://github.com/timm/readme
-
-install: ## install all the dot files
+install: vims  ## install all 
 	mkdir -p    $(HOME)/.config/ranger
-	ln -sf $d/rc.conf     $(HOME)/.config/ranger/rc.conf
-	ln -sf $d/vimrc     $(HOME)/.vimrc
-	ln -sf $d/nanorc    $(HOME)/.nanorc
-	ln -sf $d/tmux-conf $(HOME)/.tmux-conf
-	ln -sf $d/bashrc    $(HOME)/.bashrc
+	ln -sf $R/vimrc     $(HOME)/.vimrc
+	ln -sf $R/rc.conf   $(HOME)/.config/ranger/rc.conf
+	ln -sf $R/nanorc    $(HOME)/.nanorc
+	ln -sf $R/tmux-conf $(HOME)/.tmux-conf
+	ln -sf $R/bashrc    $(HOME)/.bashrc
 
-vims: ~/.vim/bundle/Vundle.vim ## install vim
+vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
+	ln -sf $R/vimrc     $(HOME)/.vimrc
 
 ~/.vim/bundle/Vundle.vim: 
 	git clone https://github.com/VundleVim/Vundle.vim.git $@
-
-all: install vims ## install everything
 
 y?=saving
 itso: ## commit to Git. To add a message, set `y=message`.
