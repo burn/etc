@@ -35,5 +35,3 @@ pull:
 
 push:
 	cd $R/../; for i in *; do (cd $$i; echo $$i; git commit -am "save all"; git push) done
-
-
