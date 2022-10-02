@@ -1,3 +1,12 @@
+#   __              __                     
+#  /\ \            /\ \__                  
+#  \_\ \     ___   \ \ ,_\   _ __    ___   
+#  /'_` \   / __`\  \ \ \/  /\`'__\ /'___\ 
+# /\ \L\ \ /\ \L\ \  \ \ \_ \ \ \/ /\ \__/ 
+# \ \___,_\\ \____/   \ \__\ \ \_\ \ \____\
+#  \/__,_ / \/___/     \/__/  \/_/  \/____/
+#                                          
+
 MAKEFLAGS += --silent
 SHELL=/bin/bash
 R=$(shell git rev-parse --show-toplevel)
@@ -18,7 +27,7 @@ install: vims  ## install all
 	ln -sf $R/bashrc    $(HOME)/.bashrc
 
 vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
-	ln -sf $R/vimrc     $(HOME)/.vimrc
+	ln -sf $R/vimrc   $(HOME)/.vimrc
 
 ~/.vim/bundle/Vundle.vim: 
 	git clone https://github.com/VundleVim/Vundle.vim.git $@
