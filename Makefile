@@ -26,3 +26,14 @@ vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
 y?=saving
 itso: ## commit to Git. To add a message, set `y=message`.
 	git commit -am "$y"; git push; git status
+
+status:
+	cd $R/../; for i in *; do (cd $$i; echo $$i; git status --porcelain) done
+
+pull:
+	cd $R/../; for i in *; do (cd $$i; echo $$i; git pull) done
+
+push:
+	cd $R/../; for i in *; do (cd $$i; echo $$i; git commit -am "save all"; git push) done
+
+
