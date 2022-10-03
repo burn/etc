@@ -43,4 +43,4 @@ pull:
 	cd $R/../; for i in *; do (cd $$i; echo $$i; git pull) done
 
 push:
-	cd $R/../; for i in *; do (cd $$i; echo $$i; git status --porcelain && git commit -am "save all"; git push) done
+	cd $R/../; for i in *; do (cd $$i; echo $$i; [[ $(shell git status --porcelain | wc -l) -gt 0 ]]  && git commit -am "save all"; git push) done
