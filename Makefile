@@ -36,7 +36,7 @@ itso: ## commit to Git. To add a message, set `y=message`.
 	git commit -am "$y"; git push; git status
 
 define red
-echo -e "\n\033[31;1;4m$1\033[0m :$2"
+echo -e "\n\033[31;1;4m$1\033[0m : $2"
 endef
 
 pull:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull); git pull)                      done
