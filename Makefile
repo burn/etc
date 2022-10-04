@@ -5,7 +5,6 @@
 # /\ \L\ \ /\ \L\ \  \ \ \_ \ \ \/ /\ \__/ 
 # \ \___,_\\ \____/   \ \__\ \ \_\ \ \____\
 #  \/__,_ / \/___/     \/__/  \/_/  \/____/
-#                                          
 
 MAKEFLAGS += --silent
 SHELL=/bin/bash
@@ -20,27 +19,22 @@ help: ## show help
 
 install: vims  ## install all 
 	mkdir -p    $(HOME)/.config/ranger
-	ln -sf $R/vimrc     $(HOME)/.vimrc
-	ln -sf $R/rc.conf   $(HOME)/.config/ranger/rc.conf
-	ln -sf $R/nanorc    $(HOME)/.nanorc
-	ln -sf $R/tmux-conf $(HOME)/.tmux-conf
-	ln -sf $R/bashrc    $(HOME)/.bashrc
+	ln -sf $R/dotrc/vimrc     $(HOME)/.vimrc
+	ln -sf $R/dotrc/rc.conf   $(HOME)/.config/ranger/rc.conf
+	ln -sf $R/dotrc/nanorc    $(HOME)/.nanorc
+	ln -sf $R/dotrc/tmux-conf $(HOME)/.tmux-conf
+	ln -sf $R/dotrc/bashrc    $(HOME)/.bashrc
 
 vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
-	ln -sf $R/vimrc   $(HOME)/.vimrc
+	ln -sf $R/dotrc/vimrc   $(HOME)/.vimrc
 
 ~/.vim/bundle/Vundle.vim: 
-	git clone https://github.com/VundleVim/Vundle.vim.git $@
+	- [[ ! -d "$@" ]] && git clone https://github.com/VundleVim/Vundle.vim.git $@
 
 y?=saving
 itso: ## commit to Git. To add a message, set `y=message`.
 	git commit -am "$y"; git push; git status
 
-status:
-	cd $R; for i in *; do (cd $$i; echo $$i; git status --porcelain) done
-
-pull:
-	cd $R; for i in *; do (cd $$i; echo $$i; git pull) done
-
-push:
-	cd $R; for i in *; do (cd $$i; echo $$i; git commit -am "$y"; git push) done
+pull:;   cd $R; for i in *; do (cd $$i; echo $$i; git pull)                      done
+status:; cd $R; for i in *; do (cd $$i; echo $$i; git status --porcelain)        done
+push:;   cd $R; for i in *; do (cd $$i; echo $$i; git commit -am "$y"; git push) done
