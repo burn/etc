@@ -35,6 +35,6 @@ y?=saving
 itso: ## commit to Git. To add a message, set `y=message`.
 	git commit -am "$y"; git push; git status
 
-pull:;   cd $R; for i in *; do (cd $$i; echo $$i; git pull)                      done
-status:; cd $R; for i in *; do (cd $$i; echo $$i; git status --porcelain)        done
-push:;   cd $R; for i in *; do (cd $$i; echo $$i; git commit -am "$y"; git push) done
+pull:;   cd $R; for i in *; do (cd $$i; printf "\n$$i\n"; git pull)                      done
+status:; cd $R; for i in *; do (cd $$i; printf "\n$$i\n"; git status --porcelain)        done
+push:;   cd $R; for i in *; do (cd $$i; printf "\n$$i\n"; git commit -am "$y"; git push) done
