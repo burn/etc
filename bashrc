@@ -6,7 +6,8 @@ alias grep='grep --color=auto'
 alias ls="ls -G"
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export PATH="$PWD:/opt/homebrew/bin:$PATH"
+export PATH="$PWD:/opt/homebrew/bin:/usr/local/Cellar:/usr/local/opt:/usr/local/bin:/opt/homebrew/cellar:$PATH"
+
 
 here() { cd $1; basename `pwd`; }
 

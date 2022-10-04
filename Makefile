@@ -26,7 +26,7 @@ install: vims  ## install all
 	ln -sf $R/dotrc/bashrc    $(HOME)/.bashrc
 
 vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
-	ln -sf $R/dotrc/vimrc   $(HOME)/.vimrc
+	ln -sf $R/dotrc/vimrc $(HOME)/.vimrc
 
 ~/.vim/bundle/Vundle.vim: 
 	- [[ ! -d "$@" ]] && git clone https://github.com/VundleVim/Vundle.vim.git $@
