@@ -31,14 +31,14 @@ vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
 ~/.vim/bundle/Vundle.vim: 
 	- [[ ! -d "$@" ]] && git clone https://github.com/VundleVim/Vundle.vim.git $@
 
-y?=saving
+y?=saving  
 itso: ## commit to Git. To add a message, set `y=message`.
 	git commit -am "$y"; git push; git status
 
 define red
-echo -e "\ncd \033[31;1;4m$1\033[0m; $2"
+  echo -e "\ncd \033[31;1;4m$1\033[0m; $2"
 endef
 
-pull:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull); git pull)                      done
+pull:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)                      done
 status:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
-push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push); git commit -am "$y"; git push) done
+push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git commit -am "$y"; git push) done
