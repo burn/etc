@@ -39,6 +39,11 @@ define red
   echo -e "\ncd \033[31;1;4m$1\033[0m; $2"
 endef
 
-pull:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)                      done
-status:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
-push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git commit -am "$y"; git push) done
+pulln:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)                      done
+statusn:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
+pushn:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git commit -am "$y"; git push) done
+
+pulls:;    cd ../dotrc; $(MAKE) pulln
+pushs:;    cd ../dotrc; $(MAKE) pushn
+statuses:; cd ../dotrc; $(MAKE) statusn
+
