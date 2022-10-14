@@ -42,9 +42,9 @@ pulln:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)      
 statusn:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
 pushn:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git commit -am "$y"; git push) done
 
-pulls:;    cd ../dotrc; $(MAKE) pulln   ## update all
-pushs:;    cd ../dotrc; $(MAKE) pushn   ## commit all
-statuses:; cd ../dotrc; $(MAKE) statusn ## status on all
+pull:;   cd ../dotrc; $(MAKE) pulln   ## update all
+push:;   cd ../dotrc; $(MAKE) pushn   ## commit all
+status:; cd ../dotrc; $(MAKE) statusn ## status on all
 
 ~/tmp/%.pdf: %.lua  ## .lua ==> .pdf
 	mkdir -p ~/tmp
