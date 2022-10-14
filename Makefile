@@ -1,21 +1,20 @@
-#   __              __                     
-#  /\ \            /\ \__                  
-#  \_\ \     ___   \ \ ,_\   _ __    ___   
-#  /'_` \   / __`\  \ \ \/  /\`'__\ /'___\ 
-# /\ \L\ \ /\ \L\ \  \ \ \_ \ \ \/ /\ \__/ 
-# \ \___,_\\ \____/   \ \__\ \ \_\ \ \____\
-#  \/__,_ / \/___/     \/__/  \/_/  \/____/
-
 MAKEFLAGS += --silent
 SHELL=/bin/bash
 R=$(shell dirname $(shell git rev-parse --show-toplevel))
 
 help: ## show help
-	echo ""; echo "# dotrc"; echo "make [OPTIONS]"; echo ""; echo "OPTIONS:"
-	grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-		| sort \
-		| awk 'BEGIN {FS = ":.*?## "}\
-	               {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
+	echo ""; echo "make [OPTIONS]"; echo ""; echo "OPTIONS:"
+	grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk ' \
+	  BEGIN {FS = ":"} \
+	        {gsub(/^.*## /,"",$$3); printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3}'
+
+tools: $R/dotrc $R/readme $R/data local
+
+$R/readme:; cd $R; git clone https://github.com/burn/readme
+$R/data  :; cd $R; git clone https://github.com/burn/data
+$R/dotrc :; cd $R; git clone https://github.com/burn/dotrc; 
+
+installall: install tools
 
 install: vims  ## install all 
 	mkdir -p    $(HOME)/.config/ranger
@@ -43,7 +42,26 @@ pulln:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)      
 statusn:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
 pushn:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git commit -am "$y"; git push) done
 
-pulls:;    cd ../dotrc; $(MAKE) pulln
-pushs:;    cd ../dotrc; $(MAKE) pushn
-statuses:; cd ../dotrc; $(MAKE) statusn
+pulls:;    cd ../dotrc; $(MAKE) pulln   ## update all
+pushs:;    cd ../dotrc; $(MAKE) pushn   ## commit all
+statuses:; cd ../dotrc; $(MAKE) statusn ## status on all
 
+~/tmp/%.pdf: %.lua  ## .lua ==> .pdf
+	mkdir -p ~/tmp
+	echo "pdf-ing $@ ... "
+	a2ps                 \
+		-Br                 \
+		-l 100                 \
+		--file-align=fill      \
+		--line-numbers=1        \
+		--borders=no             \
+		--pro=color               \
+		--left-title=""            \
+		--pretty-print="$R/dotrc/lua.ssh" \
+		--columns 3                  \
+		-M letter                     \
+		--footer=""                    \
+		--right-footer=""               \
+	  -o	 $@.ps $<
+	ps2pdf $@.ps $@; rm $@.ps
+	open $@
