@@ -7,12 +7,13 @@ help: ## show help
 		BEGIN {FS=":"; print "\nmake[OPTIONS]\n\nOPTIONS:\n"} \
 	        {gsub(/^.*## /,"",$$3); printf "  \033[36m%-10s\033[0m %s\n",$$2,$$3}'
 
-tools: $R/etc $R/readme $R/data local
+install: dotfiles tools 
+
+tools: $R/etc $R/readme $R/data 
 
 $R/readme:; cd $R; git clone https://github.com/burn/readme
 $R/data  :; cd $R; git clone https://github.com/burn/data
 
-installall: dotfiles tools 
 
 dotfiles: vims  ## install all 
 	mkdir -p    $(HOME)/.config/ranger
