@@ -32,7 +32,7 @@ vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
 
 y?=saving  
 itso: ## commit to Git. To add a message, set `y=message`.
-	(git  commit -am "$y"; git  push ; git status ) *> /dev/null 
+	git  commit -am "$y"; git  push ; git status  
 
 define red
   echo -e "\ncd \033[31;1;4m$1\033[0m; $2"
@@ -41,7 +41,7 @@ endef
 add:;    cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   $(MAKE) itso; )                done
 pull:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)                      done
 status:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
-push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git commit -am "$y"; git push) done
+push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git  commit -qam "$y"; git push -q) done
 
 
 ~/tmp/%.pdf: %.lua  ## .lua ==> .pdf
