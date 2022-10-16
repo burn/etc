@@ -41,7 +41,7 @@ endef
 add:;    cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   $(MAKE) itso; )                done
 pull:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,pull);   git pull)                      done
 status:; cd $R; for i in *; do (cd $$i; $(call red,$$i,status); git status --porcelain)        done
-push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git  commit -qam "$y"; git push -q) done
+push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git  commit -qam "$y"; git push ) done
 
 
 ~/tmp/%.pdf: %.lua  ## .lua ==> .pdf
