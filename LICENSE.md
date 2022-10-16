@@ -1,7 +1,7 @@
 Simplified BSD License
 ======================
 
-_Copyright © 2022, Tim Menzies
+_Copyright © 2022, Tim Menzies_<br>
 _All rights reserved._
 
 Redistribution and use in source and binary forms, with or without
