@@ -1,4 +1,5 @@
 MAKEFLAGS += --silent
+MAKEFLAGS += --no-print-directory
 SHELL=/bin/bash
 R=$(shell dirname $(shell git rev-parse --show-toplevel))
 
