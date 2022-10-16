@@ -32,7 +32,7 @@ vims: ~/.vim/bundle/Vundle.vim ## sub-routine. just install vim
 
 y?=saving  
 itso: ## commit to Git. To add a message, set `y=message`.
-	(git  commit -am "$y"; git  push ; git status ) > /dev/null 
+	(git  commit -am "$y"; git  push ; git status ) 2> /dev/null 
 
 define red
   echo -e "\ncd \033[31;1;4m$1\033[0m; $2"
