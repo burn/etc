@@ -9,6 +9,7 @@ alias repl="rlwrap sbcl --noinform "
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="$PWD:/opt/homebrew/bin:/usr/local/Cellar:/usr/local/opt:/usr/local/bin:/opt/homebrew/cellar:$PATH"
+export LUA_PATH="?;?.lua;../?/?;../?/?.lua"
 
 here() { cd $1; basename `pwd`; }
 
