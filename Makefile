@@ -56,7 +56,7 @@ push:;   cd $R; for i in *; do (cd $$i; $(call red,$$i,push);   git  commit -qam
 		--pro=color               \
 		--left-title=""            \
 		--pretty-print="$R/etc/lua.ssh" \
-		--columns 3                  \
+		--columns 2                  \
 		-M letter                     \
 		--footer=""                    \
 		--right-footer=""               \
