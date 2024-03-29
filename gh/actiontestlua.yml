@@ -1,0 +1,16 @@
+name: test
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: leafo/gh-actions-lua@v9
+      with:
+        luaVersion: "5.4.4"   
+    - name: test
+      run: |
+        #replace next line with test suite
+        lua -v
+    - run: echo "🍏 This job's status is ${{ job.status }}."
+
