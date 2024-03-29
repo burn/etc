@@ -19,7 +19,7 @@ help :  ## show help
       ' $(MAKEFILE_LIST)
 
 put: ## save this repos
-	@read -p "$$(PWD) commit msg> " x ;\
+	@read -p "commit msg> " x ;\
 	y=$${x:-saved} ; \
 	git commit -am "$$y" ; \
 	git push --quiet; git status ; \
