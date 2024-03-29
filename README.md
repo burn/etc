@@ -7,5 +7,4 @@ src="https://img.shields.io/badge/platform-osx,linux-pink">
 
 # Timm's gist-based tricks for scipting
 
-Url: http://tiny.cc/tricks4timm
  
