@@ -1,5 +1,5 @@
 #-- config begin -----------------------------------
-DO_repos   = ../ape ../tricks ../tests4mop 
+DO_repos   = ../lab ../etc ../tests4mop 
 #--- config end ----------------------------------
 SHELL     := bash 
 MAKEFLAGS += --warn-undefined-variables
