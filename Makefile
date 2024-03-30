@@ -33,3 +33,14 @@ pulls: ## pull from cloud for this (and related) repos
 
 puts: ## push to cloud for this (and related) repos
 	$(call DO,put)
+
+docs/%.html : %.py $(shell which pycco > /dev/null)
+	mkdir -p docs
+	pycco -d docs $^
+	echo "p {text-align: right; }" >> docs/pycco.css
+
+docs/%.html : %.lua $(shell which pycco > /dev/null)
+	mkdir -p docs
+	pycco -d docs $^
+	echo "p {text-align: right; }" >> docs/pycco.css
+
