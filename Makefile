@@ -44,4 +44,5 @@ docs/%.html : %.lua $(shell which pycco > /dev/null)
 	cp $^ docs/; \
 	cd docs;  cat $^ | lua ../../etc/luaarrow.lua > tmp; mv tmp $^; \
 	pycco -d . $^
+	rm docs/$^
 	echo "p {text-align: right; }" >> docs/pycco.css
