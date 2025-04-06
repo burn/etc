@@ -41,8 +41,12 @@ docs/%.html : %.py $(shell which pycco > /dev/null)
 
 docs/%.html : %.lua $(shell which pycco > /dev/null)
 	mkdir -p docs
-	pycco -d docs $^
+	cp $^ docs/; \
+	cd docs;  cat $^ | lua ../../etc/luaarrow.lua > tmp; mv tmp $^; \
+	pycco -d . $^
+	rm docs/$^
 	echo "p {text-align: right; }" >> docs/pycco.css
+<<<<<<< HEAD
 
 # should be dir in root/docs
 mds : $(shell ls *.md)
@@ -53,3 +57,5 @@ TWOPLUS=cat $@ | gawk 'BEGIN {FS="\n";RS=""} NR>1 { print $$0 "\n"}'
 %.md : ;  @echo "$@ ..... "; ($(ONE);  $(TWOPLUS)) > .tmp; mv .tmp $@
 
 
+=======
+>>>>>>> 531fda65638e1a4fd6ede77fbce8194874702d42
