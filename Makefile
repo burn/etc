@@ -11,7 +11,7 @@ define DO
 $(foreach d,$(DO_repos), printf "$(DO_cyan):: $1 $d$(DO_white) "; cd $d; $(MAKE) $1;)
 endef
 
-.SILENT: 
+#.SILENT: 
 
 help :  ## show help
 	awk 'BEGIN                { FS = ":.*?## "; print "\nmake [WHAT]" } \
@@ -43,4 +43,13 @@ docs/%.html : %.lua $(shell which pycco > /dev/null)
 	mkdir -p docs
 	pycco -d docs $^
 	echo "p {text-align: right; }" >> docs/pycco.css
+
+# should be dir in root/docs
+mds : $(shell ls *.md)
+
+ONE=cat ../README.md | gawk 'BEGIN {FS="\n";RS=""} {print $$0 "\n"; exit}' 
+TWOPLUS=cat $@ | gawk 'BEGIN {FS="\n";RS=""} NR>1 { print $$0 "\n"}'
+
+%.md : ;  @echo "$@ ..... "; ($(ONE);  $(TWOPLUS)) > .tmp; mv .tmp $@
+
 
